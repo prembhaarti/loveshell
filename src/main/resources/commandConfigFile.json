@@ -1,0 +1,383 @@
+{
+  "hosts": [
+    {
+      "hostName": "localhost",
+      "hostsProviderInfo": {
+        "hostsFilePath": "",
+        "hostsLoaderCommands": []
+      },
+      "commands": {
+        "listing": [
+          "ls"
+        ],
+        "machineStats": [
+          "df -h",
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    },
+    {
+      "hostName": "shield-nn1",
+      "hostsProviderInfo": {
+        "hostsFilePath": "",
+        "hostsLoaderCommands": []
+      },
+      "commands": {
+        "connectHBase": [
+          "sudo ./hBaseLogin.sh",
+          "!outputformat vertical"
+        ],
+        "raw_result_lookup": [
+          "select * from raw_result where id like 'OMS190319%' limit 1;"
+        ],
+        "cart_lookup": [
+          "select * from de_result where id like 'CAR190319%' limit 1;"
+        ],
+        "checkout_lookup": [
+          "select * from de_result where id like 'CHE190319%' limit 1;"
+        ],
+        "space": [
+          "df -h"
+        ],
+        "machineStats": [
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    },
+    {
+      "hostName": "maverick",
+      "hostsProviderInfo": {
+        "hostsFilePath": "/Users/prem.b/maverick_host.txt",
+        "hostsLoaderCommands": [
+          "ssh iaas-cli-0001.ch.flipkart.com \"kloud-cli --zone=in-chennai-1 instance --appId=raw-maverick list | grep 'primary_ip' | cut -d':' -f2- \">/Users/prem.b/maverick_host.txt"
+        ]
+      },
+      "commands": {
+        "showLogError": [
+          "cat /var/log/flipkart/raw-maverick/default.log | grep ERROR| grep -vE 'ACQUIRER_TECHNICAL_ERROR|SPECIFICATION_ERROR|ISSUER_TECHNICAL_ERROR' --color"
+        ],
+        "showZipLogError": [
+          "zcat /var/log/flipkart/raw-maverick/default.[1-10].log.gz | grep ERROR --color"
+        ],
+        "showLogErrorA20B10": [
+          "cat /var/log/flipkart/raw-maverick/default.log | grep -A 20 -B 20 ERROR --color"
+        ],
+        "showZipLogErrorA20B10": [
+          "zcat /var/log/flipkart/raw-maverick/default.[1-10].log.gz | grep ERROR --color"
+        ],
+        "findError": [
+          "cat /var/log/flipkart/raw-maverick/error.log | grep '##' --color"
+        ],
+        "findZipError": [
+          "zcat /var/log/flipkart/raw-maverick/error.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLog": [
+          "cat /var/log/flipkart/raw-maverick/default.log | grep '##' --color"
+        ],
+        "findWordInZipLog": [
+          "zcat /var/log/flipkart/raw-maverick/default.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLogA20B10": [
+          "cat /var/log/flipkart/raw-maverick/default.log | grep -A 20 -B 20 '##' --color"
+        ],
+        "findWordInZipLogA20B10": [
+          "zcat /var/log/flipkart/raw-maverick/default.[1-10].log.gz | grep -A 20 -B 20 '##' --color"
+        ],
+        "showLog": [
+          "cat /var/log/flipkart/raw-maverick/default.log"
+        ],
+        "showError": [
+          "cat /var/log/flipkart/raw-maverick/error.log"
+        ],
+        "showAccess": [
+          "cat /var/log/flipkart/raw-maverick/access.log"
+        ],
+        "tailLog": [
+          "tail -f /var/log/flipkart/raw-maverick/default.log"
+        ],
+        "tailLogError": [
+          "tail -f /var/log/flipkart/raw-maverick/default.log| grep 'ERROR' --color"
+        ],
+        "listLogs": [
+          "cd /var/log/flipkart/raw-maverick",
+          "ls -lstr"
+        ],
+        "maxSpace": [
+          "cd /",
+          "du -s * | sort -nr | head -n 5"
+        ],
+        "space": [
+          "df -h"
+        ],
+        "pkg": [
+          "dpkg -l | grep raw-maverick",
+          "sudo cat '/etc/apt/sources.list.d/raw-maverick.list'"
+        ],
+        "aptClean": [
+          "sudo apt-get clean"
+        ],
+        "history": [
+          "sudo cat /home/##/.bash_history"
+        ],
+        "findFile": [
+          "find / -name ##"
+        ],
+        "machineStats": [
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    },
+    {
+      "hostName": "shield",
+      "hostsProviderInfo": {
+        "hostsFilePath": "/Users/prem.b/shield_host.txt",
+        "hostsLoaderCommands": [
+          "ssh iaas-cli-0001.ch.flipkart.com \"kloud-cli --zone=in-chennai-1 instance --appId=raw-shield list | grep 'primary_ip' | cut -d':' -f2- \">/Users/prem.b/shield_host.txt"
+        ]
+      },
+      "commands": {
+        "showLogError": [
+          "cat /var/log/flipkart/raw-core/default.log | grep ERROR --color"
+        ],
+        "showZipLogError": [
+          "zcat /var/log/flipkart/raw-core/default.[1-10].log.gz | grep ERROR --color"
+        ],
+        "showLogErrorA20B10": [
+          "cat /var/log/flipkart/raw-core/default.log | grep -A 20 -B 20 ERROR --color"
+        ],
+        "showZipLogErrorA20B10": [
+          "zcat /var/log/flipkart/raw-core/default.[1-10].log.gz | grep ERROR --color"
+        ],
+        "findError": [
+          "cat /var/log/flipkart/raw-core/error.log | grep '##' --color"
+        ],
+        "findZipError": [
+          "zcat /var/log/flipkart/raw-core/error.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLog": [
+          "cat /var/log/flipkart/raw-core/default.log | grep '##' --color"
+        ],
+        "findWordInZipLog": [
+          "zcat /var/log/flipkart/raw-core/default.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLogA20B10": [
+          "cat /var/log/flipkart/raw-core/default.log | grep -A 20 -B 20 '##' --color"
+        ],
+        "findWordInZipLogA20B10": [
+          "zcat /var/log/flipkart/raw-core/default.[1-10].log.gz | grep -A 20 -B 20 '##' --color"
+        ],
+        "showLog": [
+          "cat /var/log/flipkart/raw-core/default.log"
+        ],
+        "showError": [
+          "cat /var/log/flipkart/raw-core/error.log"
+        ],
+        "showAccess": [
+          "cat /var/log/flipkart/raw-core/access.log"
+        ],
+        "tailLog": [
+          "tail -f /var/log/flipkart/raw-core/default.log"
+        ],
+        "tailLogError": [
+          "tail -f /var/log/flipkart/raw-core/default.log| grep 'ERROR' --color"
+        ],
+        "listLogs": [
+          "cd /var/log/flipkart/raw-core",
+          "ls -lstr"
+        ],
+        "maxSpace": [
+          "cd /",
+          "du -s * | sort -nr | head -n 5"
+        ],
+        "space": [
+          "df -h"
+        ],
+        "pkg": [
+          "dpkg -l | grep raw-core",
+          "sudo cat '/etc/apt/sources.list.d/raw-core.list'"
+        ],
+        "aptClean": [
+          "sudo apt-get clean"
+        ],
+        "history": [
+          "sudo cat /home/##/.bash_history"
+        ],
+        "machineStats": [
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    },
+    {
+      "hostName": "gandalf",
+      "hostsProviderInfo": {
+        "hostsFilePath": "/Users/prem.b/gandalf_host.txt",
+        "hostsLoaderCommands": [
+          "ssh iaas-cli-0001.ch.flipkart.com \"kloud-cli --zone=in-chennai-1 instance --appId=raw-gandalf list | grep 'primary_ip' | cut -d':' -f2- \">/Users/prem.b/gandalf_host.txt"
+        ]
+      },
+      "commands": {
+        "showLogError": [
+          "cat /var/log/flipkart/raw-gandalf/raw-gandalf.log | grep ERROR --color"
+        ],
+        "showZipLogError": [
+          "zcat /var/log/flipkart/raw-gandalf/raw-gandalf.[1-10].log.gz | grep ERROR --color"
+        ],
+        "showLogErrorA20B10": [
+          "cat /var/log/flipkart/raw-gandalf/raw-gandalf.log | grep -A 20 -B 20 ERROR --color"
+        ],
+        "showZipLogErrorA20B10": [
+          "zcat /var/log/flipkart/raw-gandalf/raw-gandalf.[1-10].log.gz | grep ERROR --color"
+        ],
+        "findError": [
+          "cat /var/log/flipkart/raw-gandalf/error.log | grep '##' --color"
+        ],
+        "findZipError": [
+          "zcat /var/log/flipkart/raw-gandalf/error.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLog": [
+          "cat /var/log/flipkart/raw-gandalf/raw-gandalf.log | grep '##' --color"
+        ],
+        "findWordInZipLog": [
+          "zcat /var/log/flipkart/raw-gandalf/raw-gandalf.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLogA20B10": [
+          "cat /var/log/flipkart/raw-gandalf/raw-gandalf.log | grep -A 20 -B 20 '##' --color"
+        ],
+        "findWordInZipLogA20B10": [
+          "zcat /var/log/flipkart/raw-gandalf/raw-gandalf.[1-10].log.gz | grep -A 20 -B 20 '##' --color"
+        ],
+        "showLog": [
+          "cat /var/log/flipkart/raw-gandalf/raw-gandalf.log"
+        ],
+        "showError": [
+          "cat /var/log/flipkart/raw-gandalf/error.log"
+        ],
+        "showAccess": [
+          "cat /var/log/flipkart/raw-gandalf/access.log"
+        ],
+        "tailLog": [
+          "tail -f /var/log/flipkart/raw-gandalf/raw-gandalf.log"
+        ],
+        "tailLogError": [
+          "tail -f /var/log/flipkart/raw-gandalf/raw-gandalf.log| grep 'ERROR' --color"
+        ],
+        "listLogs": [
+          "cd /var/log/flipkart/raw-gandalf",
+          "ls -lstr"
+        ],
+        "maxSpace": [
+          "cd /",
+          "du -s * | sort -nr | head -n 5"
+        ],
+        "space": [
+          "df -h"
+        ],
+        "pkg": [
+          "dpkg -l | grep raw-gandalf",
+          "sudo cat /etc/apt/sources.list.d/raw-gandalf.list"
+        ],
+        "aptClean": [
+          "sudo apt-get clean"
+        ],
+        "history": [
+          "sudo cat /home/##/.bash_history"
+        ],
+        "machineStats": [
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    },
+    {
+      "hostName": "omsactor",
+      "hostsProviderInfo": {
+        "hostsFilePath": "/Users/prem.b/oms_actor_host.txt",
+        "hostsLoaderCommands": [
+          "ssh iaas-cli-0001.ch.flipkart.com \"kloud-cli --zone=in-chennai-1 instance --appId=raw-oms-actor list | grep 'primary_ip' | cut -d':' -f2- \">/Users/prem.b/oms_actor_host.txt"
+        ]
+      },
+      "commands": {
+        "showLogError": [
+          "cat /var/log/flipkart/raw-oms-actor/omsactor.log | grep ERROR --color"
+        ],
+        "showZipLogError": [
+          "zcat /var/log/flipkart/raw-oms-actor/omsactor.[1-10].log.gz | grep ERROR --color"
+        ],
+        "showLogErrorA20B10": [
+          "cat /var/log/flipkart/raw-oms-actor/omsactor.log | grep -A 20 -B 20 ERROR --color"
+        ],
+        "showZipLogErrorA20B10": [
+          "zcat /var/log/flipkart/raw-oms-actor/omsactor.[1-10].log.gz | grep ERROR --color"
+        ],
+        "findError": [
+          "cat /var/log/flipkart/raw-oms-actor/error.log | grep '##' --color"
+        ],
+        "findZipError": [
+          "zcat /var/log/flipkart/raw-oms-actor/error.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLog": [
+          "cat /var/log/flipkart/raw-oms-actor/omsactor.log | grep '##' --color"
+        ],
+        "findWordInZipLog": [
+          "zcat /var/log/flipkart/raw-oms-actor/omsactor.[1-10].log.gz | grep '##' --color"
+        ],
+        "findWordInLogA20B10": [
+          "cat /var/log/flipkart/raw-oms-actor/omsactor.log | grep -A 20 -B 20 '##' --color"
+        ],
+        "findWordInZipLogA20B10": [
+          "zcat /var/log/flipkart/raw-oms-actor/omsactor.[1-10].log.gz | grep -A 20 -B 20 '##' --color"
+        ],
+        "showLog": [
+          "cat /var/log/flipkart/raw-oms-actor/omsactor.log"
+        ],
+        "showError": [
+          "cat /var/log/flipkart/raw-oms-actor/error.log"
+        ],
+        "showAccess": [
+          "cat /var/log/flipkart/raw-oms-actor/access.log"
+        ],
+        "tailLog": [
+          "tail -f /var/log/flipkart/raw-oms-actor/omsactor.log"
+        ],
+        "tailLogError": [
+          "tail -f /var/log/flipkart/raw-oms-actor/omsactor.log| grep 'ERROR' --color"
+        ],
+        "listLogs": [
+          "cd /var/log/flipkart/raw-oms-actor",
+          "ls -lstr"
+        ],
+        "maxSpace": [
+          "cd /",
+          "du -s * | sort -nr | head -n 5"
+        ],
+        "space": [
+          "df -h"
+        ],
+        "pkg": [
+          "dpkg -l | grep raw-oms-actor",
+          "sudo cat '/etc/apt/sources.list.d/raw-oms-actor.list'"
+        ],
+        "aptClean": [
+          "sudo apt-get clean"
+        ],
+        "history": [
+          "sudo cat /home/##/.bash_history"
+        ],
+        "machineStats": [
+          "top -n 1 -b -o %MEM| head -20",
+          "vmstat",
+          "iostat"
+        ]
+      }
+    }
+  ]
+}

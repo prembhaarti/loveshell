@@ -1,0 +1,13 @@
+{
+  "username": "prem.b",
+  "passPhrase": "lol",
+  "knowHostFilePath": "/Users/prem.b/.ssh/known_hosts",
+  "privateKeyFilePath": "/Users/prem.b/.ssh/id_rsa",
+  "commandConfigFilePath": "/Users/prem.b/commandConfigFile",
+  "commandHistoryFilePath": "/Users/prem.b/commandHistoryFile",
+  "userConfigFilePath": "/Users/prem.b/userConfigFile",
+  "strictHostKeyChecking": "no",
+  "channel": "shell",
+  "sessionConnectionTimeout": 30000,
+  "channelConnectionTimeout": 3000
+}
